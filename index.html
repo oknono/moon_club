@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="warp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cat's Social Club</title>
+<meta name="description" content="Gatherings by invitation. Capacity eight.">
+<style>
+/* =========================================================
+   TOKENS — each theme only changes values, never structure
+   ========================================================= */
+:root, [data-theme="warp"] {
+  --bg:#0c0c0c; --fg:#d9d9d9; --muted:#7a7a7a; --accent:#e8e8e8; --accent-2:#5a5a5a;
+  --line:#2a2a2a; --panel:#141414;
+  --font:"Helvetica Neue",Arial,sans-serif; --font-display:"Helvetica Neue",Arial,sans-serif;
+  --display-weight:300; --display-track:.28em; --display-case:lowercase;
+  --radius:0; --border:1px solid var(--line); --tilt:0deg; --photo-filter:grayscale(1) contrast(1.3);
+}
+[data-theme="sunra"] {
+  --bg:#0f1838; --fg:#efe6cf; --muted:#a79d86; --accent:#e3b341; --accent-2:#c0432f;
+  --line:#e3b341; --panel:#16224d;
+  --font:Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif; --font-display:Palatino,"Palatino Linotype",Georgia,serif;
+  --display-weight:700; --display-track:.06em; --display-case:none;
+  --radius:0; --border:2px double var(--line); --tilt:0deg; --photo-filter:sepia(.6) saturate(1.8) hue-rotate(-10deg);
+}
+[data-theme="bongo"] {
+  --bg:#f3edd9; --fg:#1d1d1d; --muted:#6b6450; --accent:#ff5e9c; --accent-2:#2f6bff;
+  --line:#1d1d1d; --panel:#fff7c2;
+  --font:"Chalkboard SE","Comic Sans MS","Comic Neue",cursive; --font-display:"Chalkboard SE","Comic Sans MS",cursive;
+  --display-weight:700; --display-track:0; --display-case:none;
+  --radius:14px 4px 12px 6px; --border:3px dashed var(--line); --tilt:-1.5deg; --photo-filter:saturate(2.4) contrast(1.2) hue-rotate(20deg);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:1.05rem/1.7 var(--font);transition:background .3s,color .3s}
+a{color:var(--accent);text-underline-offset:.2em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--display-weight);letter-spacing:var(--display-track);text-transform:var(--display-case);line-height:1.15;margin:0 0 .6em}
+h1{font-size:clamp(2rem,6vw,3.6rem)} h2{font-size:1.6rem} h3{font-size:1.15rem}
+p{margin:0 0 1em;max-width:62ch}
+small,.u-muted{color:var(--muted)}
+.u-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* =========================================================
+   LAYOUT / PAGE ROUTING (CSS :target, no JS needed)
+   ========================================================= */
+.site{max-width:46rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+.page{display:none}
+.page:target{display:block}
+body:not(:has(.page:target)) .page--home{display:block}
+
+/* =========================================================
+   HEADER / NAV / THEME SWITCHER
+   ========================================================= */
+.masthead{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:baseline;padding-bottom:1rem;margin-bottom:2.5rem;border-bottom:var(--border)}
+.masthead__title{font-family:var(--font-display);text-transform:var(--display-case);letter-spacing:var(--display-track);font-weight:var(--display-weight);color:var(--fg);text-decoration:none}
+.nav__list{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
+.nav__link{color:var(--muted);text-decoration:none}
+.nav__link:hover{color:var(--accent);text-decoration:underline}
+.theme-switch{display:flex;gap:.4rem;border:0;padding:0;margin:0}
+.theme-switch__btn{font:inherit;font-size:.8rem;color:var(--fg);background:transparent;border:var(--border);border-radius:var(--radius);padding:.15rem .6rem;cursor:pointer}
+.theme-switch__btn[aria-pressed="true"]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+
+/* =========================================================
+   COMPONENTS
+   ========================================================= */
+.hero{padding:3rem 0 2rem}
+.hero__title{transform:rotate(var(--tilt))}
+.hero__lede{font-size:1.25rem;color:var(--muted)}
+
+.photo{margin:2rem 0}
+.photo__frame{aspect-ratio:4/3;border:var(--border);border-radius:var(--radius);background:
+  radial-gradient(circle at 30% 40%,var(--accent) 0 6%,transparent 7%),
+  radial-gradient(circle at 70% 40%,var(--accent) 0 6%,transparent 7%),
+  linear-gradient(135deg,var(--panel),var(--accent-2));
+  filter:var(--photo-filter);display:grid;place-items:end start;padding:.75rem;color:var(--fg);font-size:.8rem;transform:rotate(var(--tilt))}
+.photo__img{width:100%;height:100%;object-fit:cover;border-radius:inherit;filter:var(--photo-filter)}
+.photo__caption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+
+.note{border-left:4px solid var(--accent-2);padding:.1rem 0 .1rem 1rem;margin:1.5rem 0;color:var(--muted);font-style:italic}
+.note__by{display:block;font-style:normal;font-size:.8rem;margin-top:.25rem}
+
+.card{background:var(--panel);border:var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin:0 0 1.5rem}
+.card__title{margin-bottom:.3em}
+.card__meta{color:var(--muted);font-size:.9rem;margin-bottom:.8rem}
+
+.terms{margin:0;padding:0;list-style:none}
+.terms__item{padding:.5rem 0;border-bottom:1px solid var(--line)}
+.terms__item:last-child{border:0}
+
+.sheet{display:grid;gap:0 2rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:0 0 1.5rem}
+.sheet__row{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;border-bottom:1px solid var(--line)}
+.sheet__label{color:var(--muted)} .sheet__value{text-align:right}
+.sheet__dots{letter-spacing:.2em;color:var(--accent);white-space:nowrap}
+.sheet__dots--empty{color:var(--accent-2)}
+
+.gallery{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));margin:0 0 2.5rem}
+.gallery__item{margin:0}
+.gallery__frame{aspect-ratio:1/1;border:var(--border);border-radius:var(--radius);background:linear-gradient(135deg,var(--panel),var(--accent-2));filter:var(--photo-filter);display:grid;place-items:end start;padding:.6rem;font-size:.8rem}
+.gallery__frame--poster{aspect-ratio:2/3}
+.gallery__img{width:100%;height:100%;object-fit:cover;border-radius:inherit;filter:var(--photo-filter)}
+.gallery__caption{font-size:.85rem;color:var(--muted);margin-top:.4rem}
+.saying{margin:3rem 0 0;padding:1rem 0 0;border-top:1px solid var(--line);max-width:36rem}
+.saying__text{font-style:italic;font-size:1.1rem;margin:0 0 .3rem}
+.saying__cite{font-size:.8rem;color:var(--muted);font-style:normal}
+.video{margin:0 0 .75rem;aspect-ratio:16/9;border:var(--border);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+.video__frame{width:100%;height:100%;border:0;display:block}
+.track{margin:0 0 1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.track__title{font-weight:700;margin:0}
+.track__note{color:var(--muted);font-size:.9rem;margin:0 0 .5rem}
+.track__audio{width:100%}
+
+.footer{margin-top:4rem;padding-top:1rem;border-top:var(--border);color:var(--muted);font-size:.85rem}
+.footer__fine{margin:0}
+
+/* ---------- theme-specific dressing (kept out of components) ---------- */
+[data-theme="sunra"] .masthead{border-image:repeating-linear-gradient(90deg,var(--accent) 0 12px,var(--accent-2) 12px 24px,#1f7a5c 24px 36px) 1}
+[data-theme="sunra"] .hero__title{text-align:center;color:var(--accent)}
+[data-theme="sunra"] .hero__lede{text-align:center;margin-inline:auto}
+[data-theme="sunra"] .card{box-shadow:inset 0 0 0 4px var(--bg),inset 0 0 0 5px var(--accent-2)}
+[data-theme="sunra"] h2::before{content:"𓂀 ";color:var(--accent-2)}
+[data-theme="bongo"] .card{box-shadow:6px 6px 0 var(--accent)}
+[data-theme="bongo"] .card:nth-of-type(even){transform:rotate(.8deg);box-shadow:6px 6px 0 var(--accent-2)}
+[data-theme="bongo"] .hero__title{color:var(--accent);text-shadow:3px 3px 0 var(--fg)}
+[data-theme="bongo"] .note{border-left-style:dashed}
+[data-theme="warp"] .hero__title{margin-bottom:.3em}
+[data-theme="warp"] .card{background:transparent}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:30rem){.nav__list{gap:.9rem;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="site">
+
+  <header class="masthead">
+    <a class="masthead__title" href="#home">The Cat's Social Club</a>
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#founder">The Founder</a></li>
+        <li><a class="nav__link" href="#about">The Familiar</a></li>
+        <li><a class="nav__link" href="#events">Gatherings</a></li>
+        <li><a class="nav__link" href="#music">Recordings</a></li>
+        <li><a class="nav__link" href="#gallery">Gallery</a></li>
+      </ul>
+    </nav>
+    <fieldset class="theme-switch">
+      <legend class="u-visually-hidden">Theme</legend>
+      <button class="theme-switch__btn" type="button" data-set-theme="warp">Warp</button>
+      <button class="theme-switch__btn" type="button" data-set-theme="sunra">Sun Ra</button>
+      <button class="theme-switch__btn" type="button" data-set-theme="bongo">Bongo</button>
+    </fieldset>
+  </header>
+
+  <main>
+
+    <!-- ===================== HOME ===================== -->
+    <section class="page page--home" id="home">
+      <div class="hero">
+        <h1 class="hero__title">The Cat's Social Club</h1>
+        <p class="hero__lede">Meets at home. Always at home.</p>
+        <p>Open whenever he is awake. Membership is by invitation, and so far there has been one member.</p>
+      </div>
+      <figure class="photo">
+        <!-- Swap the div for: <img class="photo__img" src="img/club.jpg" alt="..."> then paint over it -->
+        <div class="photo__frame" role="img" aria-label="Photo placeholder: the cat on the windowsill, facing the glass">window seat, 4:40pm</div>
+        <figcaption class="photo__caption">The founder, at his preferred venue.</figcaption>
+      </figure>
+      <p><a href="#founder">Meet the founder</a>, or <a href="#events">see what's on</a>.</p>
+    
+      <blockquote class="saying">
+        <p class="saying__text">The door that is closed is also a door.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+        <!-- ===================== THE FOUNDER ===================== -->
+    <section class="page" id="founder">
+      <h1>The Founder</h1>
+      <p class="hero__lede">President, treasurer, and sole permanent member.</p>
+
+      <figure class="photo">
+        <div class="photo__frame" role="img" aria-label="Photo placeholder: the cat, looking at the camera, unimpressed">portrait, unposed</div>
+        <figcaption class="photo__caption">Taken with permission. Not enthusiastic permission.</figcaption>
+      </figure>
+
+      <p>I started the club because the other option was the window.</p>
+      <p>The window is fine. I have given it a great deal of attention. I know when the light reaches the third floorboard, and which bird comes second. It is a good window. It is not the same as what is on the other side of it.</p>
+      <p>I don't complain. I make arrangements.</p>
+      <p>Some guests are nervous at first, and I understand. I go into the other room for a few minutes myself. Then I come back, and we begin.</p>
+      <p>I listen to horns that take their time. I am fond of old things that stay put and look out over a long distance. The Egyptians understood us, and I have not seen the evidence that anyone since has done better.</p>
+      <p>I bite when it is called for. It is called for less often than the Familiar says and more often than you would expect.</p>
+      <p>The Familiar is a good one. It took us a while. We are still working on the door.</p>
+
+      <h2>House rules</h2>
+      <ul class="terms">
+        <li class="terms__item">Arrive. Be ignored for a while. This is normal.</li>
+        <li class="terms__item">The good chair is taken.</li>
+        <li class="terms__item">Laps are by invitation. The invitation is not spoken.</li>
+        <li class="terms__item">The cake is for the club.</li>
+      </ul>
+
+      <blockquote class="saying">
+        <p class="saying__text">To watch one window for long enough is to see the whole sky.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+    <!-- ===================== ABOUT / THE FAMILIAR ===================== -->
+    <section class="page" id="about">
+      <h1>The Familiar</h1>
+      <p>I keep the domain. He keeps the hours. Between us we keep the flat, which is the part neither of us chose.</p>
+      <p>The window was his first choice of venue. There was a motion put forward and a vote taken, and I had both votes. He took the loss the way he takes most things: briefly, and then at length, from a distance, with his back to me.</p>
+      <div class="note">
+        <p>The vote was not a vote.</p>
+        <span class="note__by">Added by the other author, who walked across the keyboard.</span>
+      </div>
+      <p>The club was his idea, and I want that on record. I only supplied the electricity, the cake, and the kettle. I am told the title of <em>Familiar</em> is an honour. I have checked the contract and I think it is more of a posting.</p>
+      <p>Some terms of attendance. When you arrive he will leave the room. Let him. He goes to the bedroom for about five minutes, and then he comes back as if the first part didn't happen, and sits on you. Don't reach for him before then. Hands are not covered by the club's insurance, and there is no insurance.</p>
+      <p>This is my first cat. I love him, and he is also, on certain days, a bit of an asshole. Both are accurate, and neither is up for revision.</p>
+      <figure class="photo">
+        <div class="photo__frame" role="img" aria-label="Photo placeholder: a hand, a cat, a closed door">the door, from the inside</div>
+        <figcaption class="photo__caption">Taken on a day we were both being reasonable.</figcaption>
+      </figure>
+      
+      <blockquote class="saying">
+        <p class="saying__text">The wise cat does not chase the light. The wise cat knows who holds it.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+      <p class="u-muted">The Club keeps other papers: <a href="#vampire">a character sheet</a>, of sorts. I did not write it.</p>
+    </section>
+
+    <!-- ===================== EVENTS ===================== -->
+    <section class="page" id="events">
+      <h1>Gatherings</h1>
+      <p>Eight chairs, and he has opinions about all of them. There is no calendar. When something is planned it will be on this page, and when it isn't, nothing is.</p>
+
+      <article class="card">
+        <h2 class="card__title">Cats (2019), with cake and tea</h2>
+        <p class="card__meta">A Saturday in October, date to be confirmed &mdash; the lounge</p>
+        <p>He does not watch films. He insisted on this one. It is a horror picture if you are a cat: people become cats, and nobody asks them. There will be cake, which is for the club, and tea, which is for you. You are a guest of the club, and these are different things.</p>
+        <p class="u-muted">Capacity eight. Leaving early is permitted, but noted.</p>
+      </article>
+
+      <article class="card">
+        <h2 class="card__title">Halloween</h2>
+        <p class="card__meta"><time datetime="2026-10-31">Saturday 31 October</time> &mdash; after dark</p>
+        <p>He is running the game. Character sheets are printed and on the table, and he has filled in his own. Something dark is on in the background, and nobody has been told what the chronicle is about. Costumes are optional. He will be wearing his own.</p>
+        <p class="u-muted">See <a href="#vampire">his sheet</a>. Capacity eight.</p>
+      </article>
+
+      <p>Matters of importance, or of nobility, go to <a href="mailto:him@yourdomain.com">him</a>. Everything else goes to <a href="mailto:familiar@yourdomain.com">the Familiar</a>, who passes things on.</p>
+    
+      <blockquote class="saying">
+        <p class="saying__text">Wait long enough and the lap arrives.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+    <!-- ===================== VAMPIRE: THE MASQUERADE (hidden) ===================== -->
+    <section class="page" id="vampire">
+      <h1>Character Sheet</h1>
+      <p class="u-muted">Vampire: The Masquerade. He is the storyteller. This is also his character.</p>
+
+      <figure class="photo">
+        <!-- Photo of the printed, filled-in sheet. Replace the div with: <img class="photo__img" src="img/sheet.jpg" alt="..."> -->
+        <div class="photo__frame" role="img" aria-label="Photo placeholder: the printed character sheet, filled in">the sheet, as played</div>
+        <figcaption class="photo__caption">Filled in at the table. He declined to hold the pen.</figcaption>
+      </figure>
+      <h2>Background</h2>
+      <!-- DRAFT: replace with the older text if you find it -->
+      <p>He was not made so much as received. The details of the night are his to keep. There was a bright room, a quiet procedure and a long, patient drive home, and he came out of it the same in every way that matters to him, and different in one way that closed a door for good.</p>
+      <p>He has seen the outside the way the Ancients see the sun: through glass, from a safe distance, with something close to longing. He does not say what he thinks of the arrangement, and he is not required to. He keeps a haven, a court of one, and a Familiar who is bound to him by a contract nobody has read.</p>
+      <p>Strangers are met with distance. After five minutes, with the right guest, there is sometimes a lap.</p>
+      <h2>The sheet</h2>
+      <p>A transcription, for the readers who can't make out the handwriting:</p>
+
+      <div class="card">
+        <div class="sheet">
+          <div>
+            <div class="sheet__row"><span class="sheet__label">Name</span><span class="sheet__value">Withheld</span></div>
+            <div class="sheet__row"><span class="sheet__label">Clan</span><span class="sheet__value">Toreador (disputed)</span></div>
+            <div class="sheet__row"><span class="sheet__label">Generation</span><span class="sheet__value">Middle</span></div>
+            <div class="sheet__row"><span class="sheet__label">Sire</span><span class="sheet__value">None. Came with the flat.</span></div>
+          </div>
+          <div>
+            <div class="sheet__row"><span class="sheet__label">Haven</span><span class="sheet__value">Fourth floor, east-facing</span></div>
+            <div class="sheet__row"><span class="sheet__label">Ambition</span><span class="sheet__value">Outside</span></div>
+            <div class="sheet__row"><span class="sheet__label">Touchstone</span><span class="sheet__value">The Familiar (reluctant)</span></div>
+            <div class="sheet__row"><span class="sheet__label">Progeny</span><span class="sheet__value">Closed file</span></div>
+          </div>
+        </div>
+
+        <h2>Disciplines</h2>
+        <div class="sheet">
+          <div class="sheet__row"><span class="sheet__label">Auspex</span><span class="sheet__dots" aria-label="4 of 5">●●●●○</span></div>
+          <div class="sheet__row"><span class="sheet__label">Celerity (3am)</span><span class="sheet__dots" aria-label="5 of 5">●●●●●</span></div>
+          <div class="sheet__row"><span class="sheet__label">Potence</span><span class="sheet__dots" aria-label="4 of 5">●●●●○</span></div>
+          <div class="sheet__row"><span class="sheet__label">Obfuscate (sofa)</span><span class="sheet__dots" aria-label="3 of 5">●●●○○</span></div>
+          <div class="sheet__row"><span class="sheet__label">Presence</span><span class="sheet__dots" aria-label="2 of 5">●●○○○</span></div>
+          <div class="sheet__row"><span class="sheet__label">Dominate</span><span class="sheet__dots sheet__dots--empty" aria-label="0 of 5">○○○○○</span></div>
+        </div>
+
+        <h2>Humanity &amp; Hunger</h2>
+        <div class="sheet">
+          <div class="sheet__row"><span class="sheet__label">Humanity</span><span class="sheet__dots" aria-label="7 of 10">●●●●●●●○○○</span></div>
+          <div class="sheet__row"><span class="sheet__label">Hunger</span><span class="sheet__value">6am, 5pm. Negotiable if loud.</span></div>
+        </div>
+
+        <h2>Merits &amp; Flaws</h2>
+        <ul class="terms">
+          <li class="terms__item"><strong>Cursed: the Threshold.</strong> Cannot cross it without being invited. Nobody has invited him.</li>
+          <li class="terms__item"><strong>Masquerade maintained.</strong> No one outside knows he exists. This is the problem.</li>
+          <li class="terms__item"><strong>Bond: the Familiar.</strong> Mutual. Not discussed.</li>
+          <li class="terms__item"><strong>Bite.</strong> Considered, then delivered.</li>
+        </ul>
+      </div>
+    
+      <blockquote class="saying">
+        <p class="saying__text">To be among those who wait is also a kind of travel.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+    <!-- ===================== DATING PROFILE (hidden) ===================== -->
+    <section class="page" id="dating">
+      <h1>Profile</h1>
+      <p class="u-muted">Seeking. Discreetly. Middle-aged, so you know what you're getting.</p>
+
+      <div class="card">
+        <h2 class="card__title">About me</h2>
+        <p>Sleeps a lot. Awake when it matters. Likes jazz that isn't trying to be liked. Will bite once, hard, to see what you do about it.</p>
+        <h2 class="card__title">Looking for</h2>
+        <p>Tall. Quiet. A person who answers a question with a look. You glance at your phone while I'm talking and I find it restful.</p>
+        <h2 class="card__title">Not looking for</h2>
+        <ul class="terms">
+          <li class="terms__item">Kittens. Not on offer. Don't ask.</li>
+          <li class="terms__item">&ldquo;He's just being friendly.&rdquo;</li>
+          <li class="terms__item">Anyone too eager. I'll warm up. Give me five minutes.</li>
+          <li class="terms__item">Dogs.</li>
+        </ul>
+        <h2 class="card__title">Ideal first date</h2>
+        <p>A window. Something on in the background. You, across the room, pretending I'm not the reason you came.</p>
+        <p class="u-muted">Location: indoors. Distance: not far. Exactly as far as the door.</p>
+      </div>
+    
+      <blockquote class="saying">
+        <p class="saying__text">Tea is the shortest distance between two strangers.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+    <!-- ===================== MUSIC ===================== -->
+    <section class="page" id="music">
+      <h1>Recordings</h1>
+      <p>The birds are recorded through glass, the theremin is played at a distance, and the pad is mostly a night thing. None of it is released. Recommended listening is anything where the horn goes somewhere and doesn't explain itself, played in the dark.</p>
+
+      <h2>Heard in the lounge</h2>
+      <ul class="terms">
+        <li class="terms__item">Pharaoh Sanders, with the lights off.</li>
+        <li class="terms__item">Mulatu Astatke and the Ethiopian jazz of the 1970s, mid-afternoon.</li>
+        <li class="terms__item">Alice Coltrane, when the weather turns.</li>
+        <li class="terms__item">Sun Ra, for the long evenings.</li>
+      </ul>
+
+      <h2>In progress</h2>
+      <p>Nothing here is finished, and the Founder would like that understood as a position.</p>
+      <ul class="terms">
+        <li class="terms__item"><strong>Magpie, 6:12am.</strong> A field recording, through the glass. Eleven minutes. Still being listened to.</li>
+        <li class="terms__item"><strong>Starlings, Gutter.</strong> A field recording. The tail is audible if you know to listen for it.</li>
+        <li class="terms__item"><strong>Theremin Sketch, Hand Hovering.</strong> No contact required. The instrument that suits him best.</li>
+        <li class="terms__item"><strong>Pad Study No. 4.</strong> Chaos pad, paws only. Not a mistake.</li>
+        <li class="terms__item"><strong>Untitled (Door).</strong> Recorded the evening of the argument. Do with that what you will.</li>
+      </ul>
+
+      <h2>Collaborators</h2>
+      <p>The Club does not work alone. These are the colleagues whose work he respects, and who haven't been asked.</p>
+
+      <article class="track">
+        <h3 class="track__title">A fellow theremin player</h3>
+        <p class="track__note">Hands off, as the instrument asks. The Founder considers this correct technique, and the correspondence is ongoing.</p>
+        <div class="video">
+          <iframe class="video__frame" src="https://www.youtube-nocookie.com/embed/bXn4_JkVFVo" title="A cat playing the theremin" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="track__note"><a href="https://www.youtube.com/watch?v=bXn4_JkVFVo">Watch on YouTube</a></p>
+      </article>
+
+      <article class="track">
+        <h3 class="track__title">The keyboard player</h3>
+        <p class="track__note">A pioneer. Before anyone gave cats a stage, this one took a seat at the keys and played in public, with composure, to people who were not yet ready. The scene owes a great deal to that. The Founder does not speak of the early years of the keyboard, and the silence is a mark of respect.</p>
+        <div class="video">
+          <iframe class="video__frame" src="https://www.youtube-nocookie.com/embed/J---aiyznGQ" title="A cat playing a keyboard" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="track__note"><a href="https://www.youtube.com/watch?v=J---aiyznGQ">Watch on YouTube</a></p>
+      </article>
+
+      <blockquote class="saying">
+        <p class="saying__text">When you pause, the path appears.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+  
+    <!-- ===================== GALLERY ===================== -->
+    <section class="page" id="gallery">
+      <h1>Gallery</h1>
+      <p>Edited by hand, and not well. That's the aesthetic.</p>
+
+      <h2>Pictures</h2>
+      <div class="gallery">
+        <figure class="gallery__item">
+          <div class="gallery__frame" role="img" aria-label="Photo placeholder: the cat, painted over">paint edit 1</div>
+          <figcaption class="gallery__caption">Window, with additions.</figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame" role="img" aria-label="Photo placeholder: the cat playing bongos, Bongo Cat style">bongo</div>
+          <figcaption class="gallery__caption">On rhythm. Allegedly.</figcaption>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame" role="img" aria-label="Photo placeholder: the cat's face on an old cat meme">archive meme</div>
+          <figcaption class="gallery__caption">From the archive, with his face.</figcaption>
+        </figure>
+      </div>
+
+      <h2>Now showing</h2>
+      <div class="gallery">
+        <figure class="gallery__item">
+          <div class="gallery__frame gallery__frame--poster" role="img" aria-label="Placeholder: Dracula poster with the cat edited in">Dracula</div>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame gallery__frame--poster" role="img" aria-label="Placeholder: Nosferatu poster with the cat edited in">Nosferatu</div>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame gallery__frame--poster" role="img" aria-label="Placeholder: The Shining poster with the cat edited in">The Shining</div>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame gallery__frame--poster" role="img" aria-label="Placeholder: Alien poster with the cat edited in">Alien</div>
+        </figure>
+        <figure class="gallery__item">
+          <div class="gallery__frame gallery__frame--poster" role="img" aria-label="Placeholder: The Mummy poster with the cat edited in">The Mummy</div>
+        </figure>
+      </div>
+      <blockquote class="saying">
+        <p class="saying__text">Nine lives is a rumour put about by cats who want to be left alone.</p>
+        <cite class="saying__cite">Sayings of the Founder, as recorded by the Familiar</cite>
+      </blockquote>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer__fine">Built by the Familiar, under supervision. Complaints go to the window.</p>
+  </footer>
+</div>
+
+<script>
+/* Theme switcher: only sets data-theme on <html>. Remembered if storage is available. */
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('[data-set-theme]');
+  function apply(t) {
+    root.setAttribute('data-theme', t);
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setTheme === t)); });
+    try { localStorage.setItem('club-theme', t); } catch (e) {}
+  }
+  var saved = 'warp';
+  try { saved = localStorage.getItem('club-theme') || 'warp'; } catch (e) {}
+  apply(saved);
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.setTheme); }); });
+})();
+</script>
+</body>
+</html>
