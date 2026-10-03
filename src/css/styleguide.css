@@ -1,0 +1,32 @@
+/* Style guide page (local only, see src/styleguide.njk) */
+
+.styleguide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 3rem;
+}
+.styleguide__theme {
+  padding: 1.5rem;
+  border: var(--border-frame);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.styleguide__swatches {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+.styleguide__swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.styleguide__chip {
+  width: 2rem;
+  height: 1.25rem;
+  border: var(--border-frame);
+}

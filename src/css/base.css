@@ -23,7 +23,7 @@ a {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--color-accent-secondary);
+  outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
 h1,

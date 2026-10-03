@@ -6,12 +6,15 @@
     <link rel="icon" type="image/svg+xml" href="/assets/icons/moon_cat.svg" />
     <title>{% if page.url != "/" %}{{ title }} · {% endif %}Moon Cat Social Club</title>
     <meta name="description" content="Gatherings by invitation. Capacity eight." />
-    <link rel="stylesheet" href="/css/tokens.css" />
-    <link rel="stylesheet" href="/css/base.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="/css/components.css" />
-    <link rel="stylesheet" href="/css/theme-toggle.css" />
-    <script src="/js/theme.js"></script>
+    <link rel="stylesheet" href="/css/tokens.css?v={{ build }}" />
+    <link rel="stylesheet" href="/css/base.css?v={{ build }}" />
+    <link rel="stylesheet" href="/css/layout.css?v={{ build }}" />
+    <link rel="stylesheet" href="/css/components.css?v={{ build }}" />
+    <link rel="stylesheet" href="/css/theme-toggle.css?v={{ build }}" />
+    {%- if page.url == "/styleguide/" %}
+    <link rel="stylesheet" href="/css/styleguide.css?v={{ build }}" />
+    {%- endif %}
+    <script src="/js/theme.js?v={{ build }}"></script>
   </head>
   <body>
     <div class="site">

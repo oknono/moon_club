@@ -1,25 +1,44 @@
 /* Design tokens
    Light is the default. Dark only redefines the colour tokens;
-   everything else is shared. js/theme.js sets data-theme on <html>. */
+   everything else is shared. js/theme.js sets data-theme on <html>.
+   Palette: limestone and basalt, with Egyptian blue as the neon. */
 
-:root {
+:root,
+[data-theme="light"] {
   color-scheme: light;
 
   /* Colours */
-  --color-surface: #f1e8d6;
-  --color-surface-raised: #e8dcc3;
-  --color-text: #1b1812;
-  --color-text-muted: #6d6452;
-  --color-border: #cdbe9e;
-  --color-accent: #a8432a;
-  --color-accent-secondary: #1f4e8c;
+  --color-surface: #f4f1ea; /* limestone */
+  --color-surface-raised: #ebe7dd;
+  --color-text: #262420; /* warm dark grey */
+  --color-text-muted: #6e6a62;
+  --color-border: #dcd7cb;
+  --color-accent: #2340ff; /* Egyptian blue, the highlight */
+  --color-accent-secondary: #14b8a6; /* faience turquoise, decoration only */
 
   /* Sky toggle */
   --color-sun: #e8b130;
   --color-moon: #c9a54a;
   --color-pyramid-lit: #dcc595;
   --color-pyramid-shade: #b99a62;
+}
 
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-surface: #101114; /* basalt */
+  --color-surface-raised: #181a1f;
+  --color-text: #e9e5db; /* limestone */
+  --color-text-muted: #8e8a82;
+  --color-border: #26282e;
+  --color-accent: #6f86ff; /* Egyptian blue, glowing */
+  --color-accent-secondary: #3fe0cc;
+
+  --color-pyramid-lit: #1c1d22;
+  --color-pyramid-shade: #16171b;
+}
+
+:root {
   /* Typography */
   --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -29,21 +48,11 @@
 
   /* Shapes */
   --radius-box: 0;
-  --border-frame: 1px solid var(--color-border);
   --filter-photo: grayscale(1) contrast(1.2);
 }
 
-[data-theme="dark"] {
-  color-scheme: dark;
-
-  --color-surface: #0b0e17;
-  --color-surface-raised: #131826;
-  --color-text: #e6e0d0;
-  --color-text-muted: #8c8778;
-  --color-border: #262b3a;
-  --color-accent: #c9a54a;
-  --color-accent-secondary: #6f8fd1;
-
-  --color-pyramid-lit: #1a2030;
-  --color-pyramid-shade: #141926;
+/* Built from a colour token, so redeclared wherever a theme is set */
+:root,
+[data-theme] {
+  --border-frame: 1px solid var(--color-border);
 }

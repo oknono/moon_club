@@ -1,0 +1,58 @@
+---
+layout: base.njk
+title: "Style guide"
+permalink: /styleguide/
+# Local only: eleventy.config.js skips this page outside `npm start`.
+---
+{%- set colours = [
+  "surface", "surface-raised", "text", "text-muted", "border",
+  "accent", "accent-secondary", "sun", "moon", "pyramid-lit", "pyramid-shade"
+] -%}
+
+<h1>Style guide</h1>
+<p class="u-muted">Both themes side by side. Edit <code>src/css/tokens.css</code> and this page updates.</p>
+
+<div class="styleguide">
+  {%- for theme in ["light", "dark"] %}
+  <section class="styleguide__theme" data-theme="{{ theme }}">
+    <h2>{{ "day" if theme == "light" else "night" }}</h2>
+
+    <ul class="styleguide__swatches">
+      {%- for colour in colours %}
+      <li class="styleguide__swatch">
+        <span class="styleguide__chip" style="background: var(--color-{{ colour }})"></span>
+        <code>--color-{{ colour }}</code>
+      </li>
+      {%- endfor %}
+    </ul>
+
+    <h1>The Founder</h1>
+    <h2>House rules</h2>
+    <h3>Capacity eight</h3>
+    <p>
+      Membership is by invitation. Body text sits here, with
+      <a href="#">a link in Egyptian blue</a> and some
+      <span class="u-muted">muted text for asides</span>.
+    </p>
+
+    <article class="card">
+      <h2 class="card__title">Halloween</h2>
+      <p class="card__meta">31 October · the living room</p>
+      <p>A card, as used on the gatherings page.</p>
+    </article>
+
+    <div class="note">
+      A note from the Familiar.
+      <span class="note__by">— the Familiar</span>
+    </div>
+
+    <div class="sheet__row">
+      <span class="sheet__label">Dexterity</span>
+      <span class="sheet__dots">●●●<span class="sheet__dots--empty">●●</span></span>
+    </div>
+  </section>
+  {%- endfor %}
+</div>
+
+<h2>Fonts</h2>
+<p class="u-muted">Font candidates will go here once we pick a few.</p>
