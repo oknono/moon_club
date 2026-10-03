@@ -1,0 +1,69 @@
+/* Reset, typography, utilities */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 1.05rem/1.7 var(--font);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent-2);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-track);
+  text-transform: var(--display-case);
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+}
+h1 {
+  font-size: clamp(2rem, 6vw, 3.6rem);
+}
+h2 {
+  font-size: 1.6rem;
+}
+h3 {
+  font-size: 1.15rem;
+}
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+small,
+.u-muted {
+  color: var(--muted);
+}
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

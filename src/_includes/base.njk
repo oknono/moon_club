@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="warp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/moon_cat.svg" />
+    <title>{% if page.url != "/" %}{{ title }} · {% endif %}Moon Cat Social Club</title>
+    <meta name="description" content="Gatherings by invitation. Capacity eight." />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <script src="/js/theme.js" defer></script>
+  </head>
+  <body>
+    <div class="site">
+      <header class="masthead">
+        <a class="masthead__title" href="/">The Moon Cat's Social Club</a>
+        <nav class="nav" aria-label="Main">
+          <ul class="nav__list">
+            {%- for item in nav %}
+            <li>
+              <a class="nav__link" href="{{ item.url }}"
+                {%- if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+            </li>
+            {%- endfor %}
+          </ul>
+        </nav>
+        <fieldset class="theme-switch">
+          <legend class="u-visually-hidden">Theme</legend>
+          <button class="theme-switch__btn" type="button" data-set-theme="warp">Warp</button>
+          <button class="theme-switch__btn" type="button" data-set-theme="sunra">Sun Ra</button>
+          <button class="theme-switch__btn" type="button" data-set-theme="bongo">Bongo</button>
+        </fieldset>
+      </header>
+
+      <main class="page">
+        {{ content | safe }}
+      </main>
+
+      <footer class="footer">
+        <p class="footer__fine">
+          Built by the Familiar, under supervision. Complaints go to the window.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
