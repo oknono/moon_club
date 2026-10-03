@@ -1,0 +1,104 @@
+/* Sky toggle in the header, and the day/night crossfade of the page */
+
+.sky-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.sky-toggle[hidden] {
+  display: none;
+}
+.sky-toggle__label {
+  font-size: 0.75rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+.sky-toggle:hover {
+  color: var(--color-accent);
+}
+.sky-toggle__sky {
+  width: 4rem;
+  height: 2.25rem;
+  overflow: visible;
+}
+
+.sky-toggle__arc {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-dasharray: 1 3;
+  stroke-linecap: round;
+}
+.sky-toggle__horizon {
+  stroke: var(--color-text-muted);
+  stroke-linecap: round;
+}
+
+/* The sun is a plain disc, like Ra's. Turn: set by js/theme.js. */
+.sky-toggle__wheel {
+  transform: rotate(var(--sky-turn, 0deg));
+  transform-origin: 32px 32px;
+  transition: transform 1.2s cubic-bezier(0.45, 0, 0.2, 1);
+}
+.sky-toggle__sun {
+  fill: var(--color-sun);
+}
+.sky-toggle__moon {
+  fill: var(--color-moon);
+}
+.sky-toggle__moon-shadow {
+  fill: var(--color-surface);
+}
+
+.sky-toggle__stars {
+  fill: var(--color-text);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+[data-theme="dark"] .sky-toggle__stars {
+  opacity: 0.8;
+  transition-delay: 0.5s;
+}
+
+/* Birds by day, stars by night */
+.sky-toggle__birds {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.4s 0.5s;
+}
+[data-theme="dark"] .sky-toggle__birds {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+/* Drawn in front of the wheel, so the sun and moon set behind it */
+.sky-toggle__pyramid-lit {
+  fill: var(--color-pyramid-lit);
+}
+.sky-toggle__pyramid-shade {
+  fill: var(--color-pyramid-shade);
+}
+
+.sky-toggle:hover .sky-toggle__arc {
+  stroke: var(--color-accent);
+}
+
+/* Page crossfade: js/theme.js wraps the switch in a view transition, so
+   the whole page fades at once. Turn off the body colour fade meanwhile. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 1.2s;
+  animation-timing-function: ease-in-out;
+}
+:active-view-transition body {
+  transition: none;
+}

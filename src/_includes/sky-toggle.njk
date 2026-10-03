@@ -1,0 +1,41 @@
+{#- Theme toggle: a small sky. The sun and moon sit on opposite ends of a
+    wheel that turns half a circle per click, so one sets while the other
+    rises. Hidden until js/theme.js wires it up. -#}
+<button class="sky-toggle" type="button" hidden>
+  <svg class="sky-toggle__sky" viewBox="0 0 64 36" aria-hidden="true">
+    <defs>
+      <clipPath id="sky-above-horizon">
+        <rect x="0" y="0" width="64" height="32" />
+      </clipPath>
+    </defs>
+
+    <path class="sky-toggle__arc" d="M8 32 A24 24 0 0 1 56 32" />
+
+    <g class="sky-toggle__stars">
+      <circle cx="14" cy="10" r="0.9" />
+      <circle cx="50" cy="7" r="0.7" />
+      <circle cx="44" cy="18" r="0.6" />
+    </g>
+
+    <g class="sky-toggle__birds">
+      <path d="M10 13 l2 1.5 l2 -1.5" />
+      <path d="M16 9 l1.5 1 l1.5 -1" />
+    </g>
+
+    <g clip-path="url(#sky-above-horizon)">
+      <g class="sky-toggle__wheel">
+        <circle class="sky-toggle__sun" cx="32" cy="8" r="5" />
+        <circle class="sky-toggle__moon" cx="32" cy="56" r="5" />
+        <circle class="sky-toggle__moon-shadow" cx="34.5" cy="54" r="4.5" />
+      </g>
+    </g>
+
+    <g class="sky-toggle__pyramid">
+      <path class="sky-toggle__pyramid-lit" d="M37 32 L45 22 L46.5 32 Z" />
+      <path class="sky-toggle__pyramid-shade" d="M46.5 32 L45 22 L53 32 Z" />
+    </g>
+
+    <line class="sky-toggle__horizon" x1="2" y1="32" x2="62" y2="32" />
+  </svg>
+  <span class="sky-toggle__label"></span>
+</button>

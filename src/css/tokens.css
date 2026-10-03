@@ -1,6 +1,6 @@
 /* Design tokens
-   Light theme only for now. A dark theme will later redefine the
-   colour tokens; everything else stays shared. */
+   Light is the default. Dark only redefines the colour tokens;
+   everything else is shared. js/theme.js sets data-theme on <html>. */
 
 :root {
   color-scheme: light;
@@ -14,6 +14,12 @@
   --color-accent: #a8432a;
   --color-accent-secondary: #1f4e8c;
 
+  /* Sky toggle */
+  --color-sun: #e8b130;
+  --color-moon: #c9a54a;
+  --color-pyramid-lit: #dcc595;
+  --color-pyramid-shade: #b99a62;
+
   /* Typography */
   --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -25,4 +31,19 @@
   --radius-box: 0;
   --border-frame: 1px solid var(--color-border);
   --filter-photo: grayscale(1) contrast(1.2);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-surface: #0b0e17;
+  --color-surface-raised: #131826;
+  --color-text: #e6e0d0;
+  --color-text-muted: #8c8778;
+  --color-border: #262b3a;
+  --color-accent: #c9a54a;
+  --color-accent-secondary: #6f8fd1;
+
+  --color-pyramid-lit: #1a2030;
+  --color-pyramid-shade: #141926;
 }
