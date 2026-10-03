@@ -1,4 +1,4 @@
-/* Site frame: page width, header, nav, theme switch, footer */
+/* Site frame: page width, header, nav, footer */
 
 .site {
   max-width: 46rem;
@@ -14,14 +14,14 @@
   align-items: baseline;
   padding-bottom: 1rem;
   margin-bottom: 2.5rem;
-  border-bottom: var(--border);
+  border-bottom: var(--border-frame);
 }
 .masthead__title {
   font-family: var(--font-display);
-  text-transform: var(--display-case);
-  letter-spacing: var(--display-track);
-  font-weight: var(--display-weight);
-  color: var(--fg);
+  text-transform: var(--heading-case);
+  letter-spacing: var(--heading-tracking);
+  font-weight: var(--heading-weight);
+  color: var(--color-text);
   text-decoration: none;
 }
 .nav__list {
@@ -32,44 +32,21 @@
   padding: 0;
 }
 .nav__link {
-  color: var(--muted);
+  color: var(--color-text-muted);
   text-decoration: none;
 }
 .nav__link[aria-current="page"] {
-  color: var(--fg);
+  color: var(--color-text);
 }
 .nav__link:hover {
-  color: var(--accent);
+  color: var(--color-accent);
   text-decoration: underline;
 }
-.theme-switch {
-  display: flex;
-  gap: 0.4rem;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-.theme-switch__btn {
-  font: inherit;
-  font-size: 0.8rem;
-  color: var(--fg);
-  background: transparent;
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: 0.15rem 0.6rem;
-  cursor: pointer;
-}
-.theme-switch__btn[aria-pressed="true"] {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-
 .footer {
   margin-top: 4rem;
   padding-top: 1rem;
-  border-top: var(--border);
-  color: var(--muted);
+  border-top: var(--border-frame);
+  color: var(--color-text-muted);
   font-size: 0.85rem;
 }
 .footer__fine {

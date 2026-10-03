@@ -10,29 +10,29 @@ html {
 }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font: 1.05rem/1.7 var(--font);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: 1.05rem/1.7 var(--font-body);
   transition:
     background 0.3s,
     color 0.3s;
 }
 a {
-  color: var(--accent);
+  color: var(--color-accent);
   text-underline-offset: 0.2em;
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--accent-2);
+  outline: 3px solid var(--color-accent-secondary);
   outline-offset: 3px;
 }
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: var(--display-weight);
-  letter-spacing: var(--display-track);
-  text-transform: var(--display-case);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  text-transform: var(--heading-case);
   line-height: 1.15;
   margin: 0 0 0.6em;
 }
@@ -51,7 +51,7 @@ p {
 }
 small,
 .u-muted {
-  color: var(--muted);
+  color: var(--color-text-muted);
 }
 .u-visually-hidden {
   position: absolute;
