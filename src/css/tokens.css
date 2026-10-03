@@ -15,6 +15,9 @@
   --color-border: #dcd7cb;
   --color-accent: #2340ff; /* Egyptian blue, the highlight */
   --color-accent-secondary: #14b8a6; /* faience turquoise, decoration only */
+  --glow-accent: none; /* neon glow, night only */
+  --color-neon: #2340ff; /* title glyphs: Egyptian blue by day */
+  --glow-neon: none;
 
   /* Sky toggle */
   --color-sun: #e8b130;
@@ -23,25 +26,36 @@
   --color-pyramid-shade: #b99a62;
 }
 
+/* Night: the party starts. Aubergine dark, hot pink, electric blue, neon green. */
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --color-surface: #101114; /* basalt */
-  --color-surface-raised: #181a1f;
-  --color-text: #e9e5db; /* limestone */
-  --color-text-muted: #8e8a82;
-  --color-border: #26282e;
-  --color-accent: #6f86ff; /* Egyptian blue, glowing */
-  --color-accent-secondary: #3fe0cc;
+  --color-surface: #0e0a14; /* aubergine black */
+  --color-surface-raised: #181222;
+  --color-text: #f1eaf2;
+  --color-text-muted: #9d93a8;
+  --color-border: #2c2338;
+  --color-accent: #ff4fa3; /* hot pink, the highlight */
+  --color-accent-secondary: #5b7cff; /* electric Egyptian blue, decoration */
+  --glow-accent: 0 0 0.5em rgb(255 79 163 / 0.6);
+  --color-neon: #c8ffdc; /* pale core of a neon green tube */
+  --glow-neon:
+    0 0 0.05em #fff,
+    0 0 0.2em #39ff88,
+    0 0 0.5em #39ff88,
+    0 0 1.2em rgb(57 255 136 / 0.6);
 
-  --color-pyramid-lit: #1c1d22;
-  --color-pyramid-shade: #16171b;
+  --color-pyramid-lit: #1d1628;
+  --color-pyramid-shade: #161020;
 }
 
 :root {
   /* Typography */
-  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "General Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-header: var(--font-body); /* site title; the glyphs add the Egyptian */
+  --font-glyph: "Egyptian Letters", serif; /* small hieroglyphs */
+  --font-illustration: "Egyptian", serif; /* framed picture cards */
   --heading-weight: 300;
   --heading-tracking: 0.28em;
   --heading-case: lowercase;

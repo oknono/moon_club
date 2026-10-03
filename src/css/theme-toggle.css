@@ -4,9 +4,10 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0;
-  border: 0;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem 0.55rem;
+  border: var(--border-frame);
+  border-radius: 0.75rem;
   background: none;
   color: var(--color-text-muted);
   font: inherit;
@@ -16,12 +17,15 @@
   display: none;
 }
 .sky-toggle__label {
-  font-size: 0.75rem;
-  line-height: 1;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   white-space: nowrap;
 }
 .sky-toggle:hover {
   color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 .sky-toggle__sky {
   width: 4rem;

@@ -53,6 +53,15 @@ small,
 .u-muted {
   color: var(--color-text-muted);
 }
+/* A picture from the glyph font. Always aria-hidden: the letters are meaningless. */
+.glyph {
+  font-family: var(--font-glyph);
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+}
 .u-visually-hidden {
   position: absolute;
   width: 1px;

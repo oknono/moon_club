@@ -30,3 +30,26 @@
   height: 1.25rem;
   border: var(--border-frame);
 }
+
+.styleguide__font {
+  padding: 1.5rem 0;
+  border-top: var(--border-frame);
+}
+.styleguide__font-name {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem;
+}
+.styleguide__font-title {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  max-width: none;
+}
+.styleguide__font-chars {
+  font-size: 1.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  max-width: none;
+  overflow-wrap: anywhere;
+}

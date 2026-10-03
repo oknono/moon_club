@@ -6,42 +6,111 @@
   padding: 1.5rem 1.25rem 4rem;
 }
 
-.masthead {
+/* Theme toggle bar, above the page column: right on wide screens, centred on phones */
+.topbar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 1rem;
+  justify-content: flex-end;
+  padding: 1rem 1.25rem 0;
+}
+
+.masthead {
+  display: grid;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
   margin-bottom: 2.5rem;
   border-bottom: var(--border-frame);
 }
 .masthead__title {
-  font-family: var(--font-display);
-  text-transform: var(--heading-case);
-  letter-spacing: var(--heading-tracking);
-  font-weight: var(--heading-weight);
-  color: var(--color-text);
-  text-decoration: none;
-}
-.nav__list {
   display: flex;
-  gap: 1.25rem;
-  list-style: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-family: var(--font-header);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1.1;
+}
+.masthead__name {
+  text-align: center;
+  text-wrap: balance;
+}
+.masthead__title .glyph {
+  font-size: 1.3em;
+  color: var(--color-neon);
+  text-shadow: var(--glow-neon);
+}
+
+/* Nav: glyph and label in a row, items separated by a small dot.
+   Two centred rows of three; three rows of two on phones. */
+.nav__list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  gap: 0.75rem 0;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
-.nav__link {
-  color: var(--color-text-muted);
-  text-decoration: none;
+.nav__list li {
+  display: flex;
+  align-items: center;
 }
-.nav__link[aria-current="page"] {
+.nav__list li + li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  margin-inline: 1rem;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+/* No dot at the start of a row */
+.nav__list li:nth-child(3n + 1)::before {
+  display: none;
+}
+.nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   color: var(--color-text);
+  font-size: 1.1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
 }
-.nav__link:hover {
+.nav__glyph {
+  font-size: 1.6rem;
+  color: var(--color-accent-secondary);
+  transition: color 0.2s;
+}
+.nav__item:hover,
+.nav__item:hover .nav__glyph,
+.nav__item[aria-current="page"],
+.nav__item[aria-current="page"] .nav__glyph {
   color: var(--color-accent);
-  text-decoration: underline;
+  text-shadow: var(--glow-accent);
 }
+
+@media (max-width: 40rem) {
+  .topbar {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 34rem) {
+  .nav__list {
+    grid-template-columns: repeat(2, auto);
+  }
+  .nav__list li:nth-child(3n + 1)::before {
+    display: block;
+  }
+  .nav__list li:nth-child(odd)::before {
+    display: none;
+  }
+}
+
 .footer {
   margin-top: 4rem;
   padding-top: 1rem;
@@ -53,9 +122,3 @@
   margin: 0;
 }
 
-@media (max-width: 30rem) {
-  .nav__list {
-    gap: 0.9rem;
-    flex-wrap: wrap;
-  }
-}

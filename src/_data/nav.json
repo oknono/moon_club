@@ -1,7 +1,8 @@
 [
-  { "label": "The Founder", "url": "/founder/" },
-  { "label": "The Familiar", "url": "/familiar/" },
-  { "label": "Gatherings", "url": "/gatherings/" },
-  { "label": "Recordings", "url": "/recordings/" },
-  { "label": "Gallery", "url": "/gallery/" }
+  { "label": "Home", "url": "/", "glyph": "a" },
+  { "label": "The Founder", "url": "/founder/", "glyph": "c" },
+  { "label": "The Familiar", "url": "/familiar/", "glyph": "f" },
+  { "label": "Gatherings", "url": "/gatherings/", "glyph": "z" },
+  { "label": "Recordings", "url": "/recordings/", "glyph": "k" },
+  { "label": "Gallery", "url": "/gallery/", "glyph": "e" }
 ]

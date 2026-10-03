@@ -3,8 +3,6 @@
 .hero {
   padding: 3rem 0 2rem;
 }
-.hero__title {
-}
 .hero__lede {
   font-size: 1.25rem;
   color: var(--color-text-muted);

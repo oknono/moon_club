@@ -54,5 +54,19 @@ permalink: /styleguide/
   {%- endfor %}
 </div>
 
+{%- set fonts = [
+  "General Sans", "Egyptian Letters", "Egyptian"
+] %}
+
 <h2>Fonts</h2>
-<p class="u-muted">Font candidates will go here once we pick a few.</p>
+<p class="u-muted">Each font with the site title and its full character map, so we can see which letter gives which glyph.</p>
+
+{%- for font in fonts %}
+<section class="styleguide__font">
+  <h3 class="styleguide__font-name">{{ font }}</h3>
+  <p class="styleguide__font-title" style="font-family: '{{ font }}', monospace">The Moon Cat's Social Club</p>
+  <p class="styleguide__font-chars" style="font-family: '{{ font }}', monospace">
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789 &amp;?!.,:;'"()
+  </p>
+</section>
+{%- endfor %}
