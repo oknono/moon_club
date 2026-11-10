@@ -40,9 +40,7 @@
   --glow-accent: 0 0 0.5em rgb(255 79 163 / 0.6);
   --color-neon: #c8ffdc; /* pale core of a neon green tube */
   --glow-neon:
-    0 0 0.05em #fff,
-    0 0 0.2em #39ff88,
-    0 0 0.5em #39ff88,
+    0 0 0.05em #fff, 0 0 0.2em #39ff88, 0 0 0.5em #39ff88,
     0 0 1.2em rgb(57 255 136 / 0.6);
 
   --color-pyramid-lit: #1d1628;
@@ -58,11 +56,7 @@
   --font-illustration: "Egyptian", serif; /* framed picture cards */
   --heading-weight: 300;
   --heading-tracking: 0.28em;
-  --heading-case: lowercase;
-
-  /* Shapes */
   --radius-box: 0;
-  --filter-photo: grayscale(1) contrast(1.2);
 }
 
 /* Built from a colour token, so redeclared wherever a theme is set */
