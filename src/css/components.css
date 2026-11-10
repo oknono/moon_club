@@ -26,8 +26,11 @@
       var(--color-accent) 0 6%,
       transparent 7%
     ),
-    linear-gradient(135deg, var(--color-surface-raised), var(--color-accent-secondary));
-  filter: var(--filter-photo);
+    linear-gradient(
+      135deg,
+      var(--color-surface-raised),
+      var(--color-accent-secondary)
+    );
   display: grid;
   place-items: end start;
   padding: 0.75rem;
@@ -35,11 +38,10 @@
   font-size: 0.8rem;
 }
 .photo__img {
-  width: 100%;
+  width: 50vw;
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
-  filter: var(--filter-photo);
 }
 .photo__caption {
   font-size: 0.85rem;
@@ -131,8 +133,11 @@
   aspect-ratio: 1/1;
   border: var(--border-frame);
   border-radius: var(--radius-box);
-  background: linear-gradient(135deg, var(--color-surface-raised), var(--color-accent-secondary));
-  filter: var(--filter-photo);
+  background: linear-gradient(
+    135deg,
+    var(--color-surface-raised),
+    var(--color-accent-secondary)
+  );
   display: grid;
   place-items: end start;
   padding: 0.6rem;
@@ -146,7 +151,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
-  filter: var(--filter-photo);
 }
 .gallery__caption {
   font-size: 0.85rem;

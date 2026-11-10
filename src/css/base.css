@@ -70,6 +70,18 @@ small,
   clip: rect(0 0 0 0);
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .page {
+    padding: 0 30px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

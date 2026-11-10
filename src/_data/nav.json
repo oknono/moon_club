@@ -2,7 +2,5 @@
   { "label": "Home", "url": "/", "glyph": "a" },
   { "label": "The Founder", "url": "/founder/", "glyph": "c" },
   { "label": "The Familiar", "url": "/familiar/", "glyph": "f" },
-  { "label": "Gatherings", "url": "/gatherings/", "glyph": "z" },
-  { "label": "Recordings", "url": "/recordings/", "glyph": "k" },
-  { "label": "Gallery", "url": "/gallery/", "glyph": "e" }
+  { "label": "Gatherings", "url": "/gatherings/", "glyph": "z" }
 ]
