@@ -33,17 +33,17 @@
           <span class="glyph" aria-hidden="true">l</span>
         </{{ titleTag }}>
         <nav class="nav" aria-label="Main">
-          <div class="nav__list">
+          <ul class="nav__list">
             {%- for item in nav %}
-            <div>
-              <a class="nav__item" href="{{ item.url }}"
+            <li class="nav__list_item"> 
+              <a class="nav__item_link" href="{{ item.url }}"
                 {%- if page.url == item.url %} aria-current="page"{% endif %}>
                 <span class="nav__glyph glyph" aria-hidden="true">{{ item.glyph }}</span>
                 <span class="nav__label">{{ item.label }}</span>
               </a>
-            </div>
+            </li>
             {%- endfor %}
-          </div>
+          </ul>
         </nav>
       </header>
 

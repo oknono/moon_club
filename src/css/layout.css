@@ -44,36 +44,25 @@
 /* Nav: glyph and label in a row, items separated by a small dot.
    Two centred rows of three; three rows of two on phones. */
 .nav__list {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   gap: 0.75rem 0;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.nav__list li {
+.nav__list_item {
   display: flex;
   align-items: center;
-  list-style: none;
-}
-.nav__list li + li::before {
-  content: "";
-  width: 4px;
-  height: 4px;
-  margin-inline: 1rem;
-  border-radius: 50%;
-  background: var(--color-border);
 }
 
-.nav__item {
+.nav__item_link {
   display: inline-flex;
   align-items: center;
   color: var(--color-text);
   font-size: 1.1rem;
   white-space: nowrap;
   transition: color 0.2s;
-  width: 150px;
   text-decoration: none;
 }
 .nav__glyph {
@@ -82,10 +71,10 @@
   transition: color 0.2s;
   padding-right: 5px;
 }
-.nav__item:hover,
-.nav__item:hover .nav__glyph,
-.nav__item[aria-current="page"],
-.nav__item[aria-current="page"] .nav__glyph {
+.nav__item_link:hover,
+.nav__item_link:hover .nav__glyph,
+.nav__item_link[aria-current="page"],
+.nav__item_link[aria-current="page"] .nav__glyph {
   color: var(--color-accent);
   text-shadow: var(--glow-accent);
 }
@@ -98,13 +87,8 @@
 
 @media (max-width: 34rem) {
   .nav__list {
-    grid-template-columns: repeat(2, auto);
-  }
-  .nav__list li:nth-child(3n + 1)::before {
-    display: block;
-  }
-  .nav__list li:nth-child(odd)::before {
-    display: none;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
